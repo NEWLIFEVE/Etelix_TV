@@ -31,9 +31,9 @@ DirectoryIndex index.php index.html index.htm
   php_flag session.auto_start               off
   php_value mbstring.http_input             pass
   php_value mbstring.http_output            pass
-  php_value  upload_max_filesize  100M
-  php_value  post_max_size  100M
-  php_value  memory_limit  32M
+  php_value  upload_max_filesize  500M
+  php_value  post_max_size  500M
+  php_value  memory_limit  64M
   php_flag mbstring.encoding_translation    off
 </IfModule>
 
