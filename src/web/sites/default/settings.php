@@ -214,7 +214,7 @@ $databases = array();
 
 $databases['default']['default'] = array(
       'driver' => 'pgsql',
-      'database' => 'dev_etelix_tv',
+      'database' => 'etelix_tv',
       'username' => 'postgres',
       'password' => 'Nsusfd8263',
       'host' => 'localhost',
