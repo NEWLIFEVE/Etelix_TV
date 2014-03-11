@@ -214,10 +214,10 @@ $databases = array();
 
 $databases['default']['default'] = array(
       'driver' => 'pgsql',
-      'database' => 'etelix_tv',
+      'database' => 'dev_etelix_tv',
       'username' => 'postgres',
-      'password' => '123',
-      'host' => '172.16.17.190',
+      'password' => 'nsusfd8263',
+      'host' => 'localhost',
       'prefix' => '',
     );
 /**$data
