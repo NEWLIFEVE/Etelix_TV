@@ -1,5 +1,35 @@
 <?php
-
+//Definimos el servidor de produccion
+define('SERVER_NAME_PROD','etelixtv.sacet.com.ve');
+//Definimos el servidor de preproduccion
+define('SERVER_NAME_PRE_PROD','dtv.sacet.com.ve');
+//Definimos el servidor de desarrollo
+define('SERVER_NAME_DEV','etelix.tv.local');
+//Obtenemos el nombre del servidor actual
+$server=$_SERVER['SERVER_NAME'];
+switch ($server)
+{
+	case SERVER_NAME_PROD:
+		$server_db='localhost';
+		$etelix_tv_db='etelix_tv';
+		$user_db='postgres';
+		$pass_db='Nsusfd8263';
+		break;
+	case SERVER_NAME_PRE_PROD:
+		$server_db='localhost';
+		$etelix_tv_db='dev_etelix_tv';
+		$user_db='postgres';
+		$pass_db='Nsusfd8263';
+		break;
+	
+	case SERVER_NAME_DEV:
+	default:
+		$server_db='172.16.17.190';
+		$etelix_tv_db='etelix_tv';
+		$user_db='postgres';
+		$pass_db='123';
+		break;
+}
 /**
  * @file
  * Drupal site-specific configuration file.
@@ -214,10 +244,10 @@ $databases = array();
 
 $databases['default']['default'] = array(
       'driver' => 'pgsql',
-      'database' => 'etelix_tv',
-      'username' => 'postgres',
-      'password' => '123',
-      'host' => '172.16.17.190',
+      'database' => $etelix_tv_db,
+      'username' => $user_db,
+      'password' => $pass_db,
+      'host' => $server_db,
       'prefix' => '',
     );
 /**$data
