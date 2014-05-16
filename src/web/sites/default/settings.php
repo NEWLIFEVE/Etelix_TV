@@ -1,5 +1,10 @@
 <?php
 
+		$server_db='172.16.17.190';
+		$etelix_tv_db='etelix_tv';
+		$user_db='postgres';
+		$pass_db='123';
+
 /**
  * @file
  * Drupal site-specific configuration file.
@@ -214,10 +219,10 @@ $databases = array();
 
 $databases['default']['default'] = array(
       'driver' => 'pgsql',
-      'database' => 'etelix_tv',
-      'username' => 'postgres',
-      'password' => 'Nsusfd8263',
-      'host' => 'localhost',
+      'database' => $etelix_tv_db,
+      'username' => $user_db,
+      'password' => $pass_db,
+      'host' => $server_db,
       'prefix' => '',
     );
 /**$data
