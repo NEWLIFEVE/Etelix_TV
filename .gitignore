@@ -18,6 +18,7 @@ src/web/README.txt
 src/web/sites/all/README.txt
 src/web/sites/all/modules/README.txt
 src/web/sites/all/themes/README.txt
+src/web/sites/default/settings.php
 
 # Ignore everything but the "sites" folder ( for non core developer )
 #src/web/web.config
