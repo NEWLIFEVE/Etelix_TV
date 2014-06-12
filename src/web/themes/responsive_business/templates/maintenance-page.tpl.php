@@ -12,7 +12,6 @@
 ?>
 <!DOCTYPE html>
 <html lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>">
-
 <head>
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>
@@ -21,7 +20,6 @@
 </head>
 
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
-
 
 <div id="wrap" class="clearfix">
   <header id="header" class="clearfix">

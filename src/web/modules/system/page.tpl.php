@@ -115,7 +115,7 @@
     <?php endif; ?>
 
     <?php if ($breadcrumb): ?>
-      <div id="breadcrumb"><?php print $breadcrumb; ?></div>
+      <div id="breadcrumb"><?php print //$breadcrumb; ?></div>
     <?php endif; ?>
 
     <?php print $messages; ?>

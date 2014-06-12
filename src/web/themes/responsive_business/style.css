@@ -22,15 +22,35 @@ table, caption, tbody, tfoot, thead, tr, th, td {
   outline: 0;
   padding: 0;
   vertical-align: baseline;
+  }
+
+.texto{
+  color: black;
+  
 }
+
+.titulo{
+    text-align: right;
+  }
+
+.black{
+  font-weight: bold;
+  color: black;
+}
+
+.subyarar{
+  text-decoration: underline;
+}
+
 
 /* remember to define focus styles! */
 :focus {
   outline: 0;
 }
 body {
-  background: #fff;
+  /*background: #fff;*/
   line-height: 1;
+  padding-top: 65px;
 }
 ol, ul {
   list-style: none;
@@ -93,7 +113,7 @@ a {
   color: #47c0c0;
 }
 a:hover {
-  text-decoration: none;
+  text-decoration: underline;
   color: #2e8484;
 }
 p { margin: 0 0 1em }
@@ -123,10 +143,7 @@ pre{
 * html .clearfix{ zoom: 1; } /* IE6 */
 *:first-child+html .clearfix { zoom: 1; } /* IE7 */
 .remove-margin { margin-right: 0 !important }
-
-
 /*  Structure  */
-
 #wrap{
   background: #fff;
   margin: 0 auto;
@@ -136,9 +153,11 @@ pre{
   -moz-box-shadow: 0 0 10px rgba(0,0,0,.2);
   box-shadow: 0 0 10px rgba(0,0,0,.2);
 }
+/
 
 #main{
-  margin: 25px 0;
+  margin: 25px;
+  background:rgba(235, 214, 214);
 }
 
 /* Headings */
@@ -171,12 +190,12 @@ h3 a,
 h4 a { color: #000; }
 h2 a:hover,
 h3 a:hover,
-h4 a:hover { color: #999; text-decoration: none; }
+h4 a:hover { color: blue; text-decoration: none; }
 
 /* Text elements */
 
 ul, ol {
-  margin: 0 0 1.5em 2em;
+  margin: 0 0 0.5em 0em;
 }
 ul {
   list-style: disc;
@@ -269,7 +288,7 @@ td{
   width: 40%;
 }
 
-#logoimg {
+#logoimg{
   float: left;
   padding-right: 10px;
 }
@@ -320,6 +339,7 @@ td{
 #main-menu ul li {
   float: left;
   position: relative;
+
 }
 #main-menu ul a {
   display: block;
@@ -339,8 +359,9 @@ td{
   top: 0;
 }
 /*** Navigation skin ***/
-#main-menu ul {
+#main-menu ul{
   float: left;
+  /*margin-top: 65px;*/
 }
 #main-menu ul a {
   height: 40px;
@@ -361,7 +382,9 @@ td{
 #main-menu ul > li > a:active,
 #main-menu ul > li.sfHover > a,
 #main-menu ul a.active {
-  color: #000;
+  /*color: #000; */
+  color: blue;
+  text-decoration: underline;
 }
 /*Subs*/
 #main-menu ul ul{
@@ -517,7 +540,7 @@ ul.flex-direction-nav {
 }
 .preface-block{
   float: left;
-  width: 310px;
+  width: 840px;
   margin-right: 20px;
 }
 
@@ -558,7 +581,7 @@ body.sidebar-first #content {
 .region-header .block > h2,
 .region-footer .block > h2, 
 .region-content-top .block > h2{
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   margin-bottom: 10px;
   margin-top: 0 !important;
@@ -957,6 +980,8 @@ ol.search-results { padding-left: 0; }
 ul.menu li {
   margin: 0;
   padding: 0;
+  display: inline-block; 
+  padding-right: 12px;
 }
 
 ul.inline {
@@ -1188,32 +1213,25 @@ border-left: 1px solid; border-right: 1px solid; height: 40px; margin-left: -36p
   border: 1px solid #d9d9d9;
   margin: 5px 7px 5px 0;
 }
-
 #forum th {
   background: #434343;
   text-shadow: none;
   color: #fff;
 }
-
 #forum th a {
   color: #fff;
 }
-
 #forum td.forum .icon, #forum .icon div {
   background: url(images/no-new-posts.png) no-repeat;
   width: 35px;
   height: 35px;
 }
-
 #forum .name a{ 
   font-size: 16px;
 }
-
-
 /*-----------------------------------------------------------------------------------*
 /* Shortcodes
 /*-----------------------------------------------------------------------------------*/
-
 /*columns*/
 .one-half{ width:48%; }
 .one-third{ width:30.66%; }

@@ -1912,7 +1912,7 @@ function _node_revision_access($node, $op = 'view', $account = NULL) {
   if (!$node || !isset($map[$op])) {
     // If there was no node to check against, or the $op was not one of the
     // supported ones, we return access denied.
-    return FALSE;
+       return FALSE;
   }
 
   if (!isset($account)) {

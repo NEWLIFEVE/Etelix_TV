@@ -4,7 +4,6 @@
  * @file
  * Dummy module implementing a form to test user password validation
  */
-
 /**
  * Implements hook_menu().
  *
@@ -55,7 +54,6 @@ function user_form_test_current_password($form, &$form_state, $account) {
   );
   return $form;
 }
-
 /**
  * Submit function for the test form for user_validate_current_pass().
  */
