@@ -63,6 +63,19 @@
  * @see template_preprocess_page()
  * @see template_process()
  */
+
+
+function get_theme_uri( $path = '' ) {
+  return uri() . drupal_get_path( 'theme', 'bachoco' ) . '/' . $path;
+}
+
+// Get full URI
+function uri( $url = '', $query = array() ) {
+  return url( $url, array( 'query' => $query, 'absolute' => true ) ); 
+}
+
+
+
 ?>
 <div id="wrap" class="clearfix">
   <header id="header" class="clearfix">
@@ -73,13 +86,33 @@
     <nav id="navigation" role="navigation" class="clearfix">
       <div id="main-menu">
         <?php 
-          if (module_exists('i18n')) {
+          if (module_exists('i18n'))
+          {
             $main_menu_tree = i18n_menu_translated_tree(variable_get('menu_main_links_source', 'main-menu'));
-          } else {
+          }else
+          {
             $main_menu_tree = menu_tree(variable_get('menu_main_links_source', 'main-menu'));
           }
           print drupal_render($main_menu_tree);
-        ?>
+          
+          ?>
+          <?php
+          /*
+          if(in_array('gerente', $user->roles)):
+            echo "Gerente";
+          endif;  
+          */
+          ?>
+
+          <?php
+          /*
+          if(in_array('administrator', $user->roles)):
+            echo "administrador<br>"; */
+          ?>
+   
+          <?php 
+          //endif;  
+           ?> 
       </div>
     </nav>
   </header>
@@ -143,6 +176,15 @@
       <?php 
             if(isset($_SESSION))
             {
+              /*
+              $tipo_usuario=array();
+
+              foreach($user->roles as $role) {
+                array_push($tipo_usuario,$role);
+              }
+              echo $tipo_usuario[1];
+              */
+
               print render($page['content']);
             }else
             {

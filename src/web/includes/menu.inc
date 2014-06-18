@@ -448,6 +448,7 @@ function menu_get_item($path = NULL, $router_item = NULL) {
   $router_items = &drupal_static(__FUNCTION__);
   if (!isset($path)) {
     $path = $_GET['q'];
+
   }
   if (isset($router_item)) {
     $router_items[$path] = $router_item;
@@ -463,6 +464,7 @@ function menu_get_item($path = NULL, $router_item = NULL) {
     $parts = array_slice($original_map, 0, MENU_MAX_PARTS);
     $ancestors = menu_get_ancestors($parts);
     $router_item = db_query_range('SELECT * FROM {menu_router} WHERE path IN (:ancestors) ORDER BY fit DESC', 0, 1, array(':ancestors' => $ancestors))->fetchAssoc();
+
 
     if ($router_item) {
       // Allow modules to alter the router item before it is translated and
@@ -989,13 +991,16 @@ function menu_get_object($type = 'node', $position = 1, $path = NULL) {
  *   A structured array representing the specified menu on the current page, to
  *   be rendered by drupal_render().
  */
-function menu_tree($menu_name) {
+function menu_tree($menu_name){
   $menu_output = &drupal_static(__FUNCTION__, array());
 
   if (!isset($menu_output[$menu_name])) {
     $tree = menu_tree_page_data($menu_name);
+
     $menu_output[$menu_name] = menu_tree_output($tree);
+
   }
+  //var_dump($menu_output[$menu_name]);
   return $menu_output[$menu_name];
 }
 
@@ -1022,11 +1027,13 @@ function menu_tree_output($tree) {
   foreach ($tree as $data) {
     if ($data['link']['access'] && !$data['link']['hidden']) {
       $items[] = $data;
+
     }
   }
 
   $router_item = menu_get_item();
   $num_items = count($items);
+
   foreach ($items as $i => $data) {
     $class = array();
     if ($i == 0) {
@@ -1071,14 +1078,14 @@ function menu_tree_output($tree) {
     // Index using the link's unique mlid.
     $build[$data['link']['mlid']] = $element;
   }
-  if ($build) {
+  if ($build){
     // Make sure drupal_render() does not re-order the links.
     $build['#sorted'] = TRUE;
     // Add the theme wrapper for outer markup.
     // Allow menu-specific theme overrides.
     $build['#theme_wrappers'][] = 'menu_tree__' . strtr($data['link']['menu_name'], '-', '_');
   }
-
+  //var_dump($build);
   return $build;
 }
 
@@ -1216,11 +1223,13 @@ function menu_tree_page_data($menu_name, $max_depth = NULL, $only_active_trail =
 
   // Check if the active trail has been overridden for this menu tree.
   $active_path = menu_tree_get_path($menu_name);
+
   // Load the menu item corresponding to the current page.
   if ($item = menu_get_item($active_path)) {
     if (isset($max_depth)) {
       $max_depth = min($max_depth, MENU_MAX_DEPTH);
     }
+  
     // Generate a cache ID (cid) specific for this page.
     $cid = 'links:' . $menu_name . ':page:' . $item['href'] . ':' . $GLOBALS['language']->language . ':' . (int) $item['access'] . ':' . (int) $max_depth;
     // If we are asked for the active trail only, and $menu_name has not been
@@ -1231,7 +1240,8 @@ function menu_tree_page_data($menu_name, $max_depth = NULL, $only_active_trail =
     // whether we have the menu already in cache, or otherwise, build a minimum
     // tree containing the breadcrumb/active trail only.
     // @see menu_set_active_trail()
-    if (!isset($tree[$cid]) && $only_active_trail) {
+
+    if (!isset($tree[$cid]) && $only_active_trail){
       $cid .= ':trail';
     }
 
@@ -1303,6 +1313,7 @@ function menu_tree_page_data($menu_name, $max_depth = NULL, $only_active_trail =
           }
           $tree_parameters['expanded'] = $parents;
           $tree_parameters['active_trail'] = $active_trail;
+
         }
         // If access is denied, we only show top-level links in menus.
         else {
@@ -1317,6 +1328,8 @@ function menu_tree_page_data($menu_name, $max_depth = NULL, $only_active_trail =
       // by _menu_build_tree().
       $tree[$cid] = menu_build_tree($menu_name, $tree_parameters);
     }
+    //retorna el menu completo
+  
     return $tree[$cid];
   }
 
@@ -1350,9 +1363,12 @@ function menu_tree_page_data($menu_name, $max_depth = NULL, $only_active_trail =
  */
 function menu_build_tree($menu_name, array $parameters = array()) {
   // Build the menu tree.
+
   $data = _menu_build_tree($menu_name, $parameters);
   // Check access for the current user to each item in the tree.
   menu_tree_check_access($data['tree'], $data['node_links']);
+
+
   return $data['tree'];
 }
 
@@ -1493,6 +1509,9 @@ function menu_tree_check_access(&$tree, $node_links = array()) {
     $select->condition('n.nid', $nids, 'IN');
     $select->addTag('node_access');
     $nids = $select->execute()->fetchCol();
+
+
+
     foreach ($nids as $nid) {
       foreach ($node_links[$nid] as $mlid => $link) {
         $node_links[$nid][$mlid]['access'] = TRUE;
@@ -1833,7 +1852,7 @@ function menu_secondary_menu() {
  */
 function menu_navigation_links($menu_name, $level = 0) {
   // Don't even bother querying the menu table if no menu is specified.
-  if (empty($menu_name)) {
+  if (empty($menu_name)){
     return array();
   }
 
@@ -1851,32 +1870,34 @@ function menu_navigation_links($menu_name, $level = 0) {
       }
     }
   }
-
   // Create a single level of links.
   $router_item = menu_get_item();
+
   $links = array();
-  foreach ($tree as $item) {
+  foreach ($tree as $item){
     if (!$item['link']['hidden']) {
       $class = '';
       $l = $item['link']['localized_options'];
       $l['href'] = $item['link']['href'];
       $l['title'] = $item['link']['title'];
-      if ($item['link']['in_active_trail']) {
+      if ($item['link']['in_active_trail']){
         $class = ' active-trail';
         $l['attributes']['class'][] = 'active-trail';
       }
+    
       // Normally, l() compares the href of every link with $_GET['q'] and sets
       // the active class accordingly. But local tasks do not appear in menu
       // trees, so if the current path is a local task, and this link is its
       // tab root, then we have to set the class manually.
-      if ($item['link']['href'] == $router_item['tab_root_href'] && $item['link']['href'] != $_GET['q']) {
+      if ($item['link']['href'] == $router_item['tab_root_href'] && $item['link']['href'] != $_GET['q']){
         $l['attributes']['class'][] = 'active';
       }
       // Keyed with the unique mlid to generate classes in theme_links().
       $links['menu-' . $item['link']['mlid'] . $class] = $l;
     }
   }
-  return $links;
+
+    return $links;
 }
 
 /**
@@ -2317,6 +2338,8 @@ function menu_set_active_menu_names($menu_names = NULL) {
   elseif (!isset($active)) {
     $active = variable_get('menu_default_active_menus', array_keys(menu_list_system_menus()));
   }
+
+
   return $active;
 }
 

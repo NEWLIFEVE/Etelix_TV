@@ -151,7 +151,7 @@ function taxonomy_term_uri($term) {
 /**
  * Implements hook_field_extra_fields().
  */
-function taxonomy_field_extra_fields() {
+function taxonomy_field_extra_fields(){
   $return = array();
   $info = entity_get_info('taxonomy_term');
   foreach (array_keys($info['bundles']) as $bundle) {
@@ -160,24 +160,28 @@ function taxonomy_field_extra_fields() {
         'name' => array(
           'label' => t('Name'),
           'description' => t('Term name textfield'),
-          'weight' => -5,
+          'weight' => 0,
         ),
         'description' => array(
           'label' => t('Description'),
           'description' => t('Term description textarea'),
           'weight' => 0,
         ),
+        'Rol'=> array(
+          'label' => t('Roles'),
+          'description' => t('Roles'),
+          'weight' => 0, 
+          ),
       ),
       'display' => array(
         'description' => array(
           'label' => t('Description'),
           'description' => t('Term description'),
-          'weight' => 0,
+          'weight' => 33,
         ),
       ),
     );
   }
-
   return $return;
 }
 
@@ -959,7 +963,7 @@ function taxonomy_terms_static_reset() {
  * @param $ids
  * An array of ids to reset in entity controller cache.
  */
-function taxonomy_vocabulary_static_reset($ids = NULL) {
+function taxonomy_vocabulary_static_reset($ids = NULL){
   drupal_static_reset('taxonomy_vocabulary_get_names');
   entity_get_controller('taxonomy_vocabulary')->resetCache($ids);
 }
