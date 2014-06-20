@@ -151,7 +151,7 @@ function taxonomy_term_uri($term) {
 /**
  * Implements hook_field_extra_fields().
  */
-function taxonomy_field_extra_fields(){
+function taxonomy_field_extra_fields() {
   $return = array();
   $info = entity_get_info('taxonomy_term');
   foreach (array_keys($info['bundles']) as $bundle) {
@@ -160,28 +160,24 @@ function taxonomy_field_extra_fields(){
         'name' => array(
           'label' => t('Name'),
           'description' => t('Term name textfield'),
-          'weight' => 0,
+          'weight' => -5,
         ),
         'description' => array(
           'label' => t('Description'),
           'description' => t('Term description textarea'),
           'weight' => 0,
         ),
-        'Rol'=> array(
-          'label' => t('Roles'),
-          'description' => t('Roles'),
-          'weight' => 0, 
-          ),
       ),
       'display' => array(
         'description' => array(
           'label' => t('Description'),
           'description' => t('Term description'),
-          'weight' => 33,
+          'weight' => 0,
         ),
       ),
     );
   }
+
   return $return;
 }
 
@@ -461,7 +457,12 @@ function taxonomy_vocabulary_save($vocabulary) {
 }
 
 /**
- * Delete a vocabulary.
+ * Deletes a vocabulary.
+ *
+ * This will update all Taxonomy fields so that they don't reference the
+ * deleted vocabulary. It also will delete fields that have no remaining
+ * vocabulary references. All taxonomy terms of the deleted vocabulary
+ * will be deleted as well.
  *
  * @param $vid
  *   A vocabulary ID.
@@ -752,7 +753,7 @@ function taxonomy_term_delete($tid) {
  * @param term
  *   A taxonomy term object.
  * @return
- *   A $page element suitable for use by drupal_page_render().
+ *   A $page element suitable for use by drupal_render().
  */
 function taxonomy_term_show($term) {
   return taxonomy_term_view_multiple(array($term->tid => $term), 'full');
@@ -963,7 +964,7 @@ function taxonomy_terms_static_reset() {
  * @param $ids
  * An array of ids to reset in entity controller cache.
  */
-function taxonomy_vocabulary_static_reset($ids = NULL){
+function taxonomy_vocabulary_static_reset($ids = NULL) {
   drupal_static_reset('taxonomy_vocabulary_get_names');
   entity_get_controller('taxonomy_vocabulary')->resetCache($ids);
 }

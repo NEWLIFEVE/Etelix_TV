@@ -780,7 +780,7 @@ function search_index($sid, $module, $text) {
  * @param $nid
  *   The node ID of the node that needs reindexing.
  */
-function search_touch_node($nid){
+function search_touch_node($nid) {
   db_update('search_dataset')
     ->fields(array('reindex' => REQUEST_TIME))
     ->condition('type', 'node')
