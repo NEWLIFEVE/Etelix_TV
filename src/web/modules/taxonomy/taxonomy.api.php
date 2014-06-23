@@ -135,7 +135,7 @@ function hook_taxonomy_term_presave($term) {
  * @param $term
  *   A taxonomy term object.
  */
-function hook_taxonomy_term_insert($term){
+function hook_taxonomy_term_insert($term) {
   db_insert('mytable')
     ->fields(array(
       'tid' => $term->tid,
